@@ -1,0 +1,62 @@
+M -> Modelo -> Funciones
+V -> Vista -> Como se ve (html, css, nunjucks, react)
+C -> Controlador -> ejecutar Modelo
+
+## npm run start
+## Router = controlador
+
+ORM = Mapeo relacional de objetos: tecnica de programacion 
+
+Tenemos q hacer un login, que es una técnica de programación para convertir datos entre el sistema de tipos utilizado en un lenguaje de programación orientado a objetos y la utilización de una base de datos relacional como motor de persistencia. 
+
+
+- ANTICUADO
+CJS 
+Common JS
+- ES EL QUE SE VA A UTILIZAR
+ESm
+
+- npm init -y
+- npm i express;
+
+si en el index.js voy a importar express 
+import express from 'express'
+ir a package.json 
+y escribir debajo de main  `"type": "module",`
+volver  ejecutar
+
+# Imageboard
+
+## Introduccion
+
+Este proyecto es un imageboard que permite a los usuarios
+
+- Crear hilos en tablones
+- Dejar imagenes a los hilos
+- Comentar en los hilos
+- Dejar imagenes en los comentarios
+- Solo los usuarios pueden interactuar con los tablones
+- Los usuarios pueden registrarse con nombre y contraseña
+- Los usuarios pueden logearse usando sus credenciales
+- Los usarios pueden ver su perfil
+
+## Tecnologias
+
+- Nodejs, estamos usando ESM En lugar de CommonJS, esto hace que:
+ - Usaremos import/export en lugar de require/module.exports
+ - Debemos añadir `type: "module"` en el package.json
+- Express para el backend
+- Sequ
+
+ESM = deja utilizar import y export
+para ESM funcione tenemos que cambiar la configuracion de package.json
+type: "module"
+
+node index.js
+node populate.js
+npm run start
+
+## HTTP 
+header: metadatos(desde que ip se ha echo la peticion, datos de esta etc..)
+body: datos enviados por cliente
+

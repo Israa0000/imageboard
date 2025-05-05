@@ -1,0 +1,19 @@
+{% extends "base.njk"%}
+
+{%block content%}
+    {{title}}
+    {{desc}}
+    <form action="/users/register" method="POST">
+        <div>
+            <input type="text" name="username" placeholder="Nombre de Usuario" required>
+        </div>
+        <div>
+            <input type="password" name="password" placeholder="Contraseña" required>
+        </div>
+        <div>
+            <button type="submit">Register</button>
+        </div>
+    </form>
+</body>
+</html>
+{% endblock %}
