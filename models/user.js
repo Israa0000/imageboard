@@ -1,11 +1,11 @@
-import { Sequelize } from "sequelize";
-import { sequelize } from "../db/sequelize.js";
+import { Sequelize } from 'sequelize';
+import { sequelize } from '../db/sequelize.js';
 
-export const User = sequelize.define("User", {
+export const User = sequelize.define('User', {
     id: {
         type: Sequelize.INTEGER,
-        primaryKey: true,
         autoIncrement: true,
+        primaryKey: true,
     },
     username: {
         type: Sequelize.STRING,

@@ -1,73 +1,50 @@
-import express from 'express';
-import nunjucks from 'nunjucks';
-import { User } from './models/user.js';
-import { loggerBasic, loggerCustom } from './middleware/log.js';  
-import userRouter from './router/users.js';
-import pagesRouter from './router/pages.js';
-import authRouter from './router/auth.js';
-import session from 'express-session';
-import SQLitestore from 'connect-sqlite3';
+import express from "express";
+import nunjucks from "nunjucks";
+import { User } from "./models/user.js";
+import { loggerBasic, loggerCustom } from "./middleware/log.js";
+import session from "express-session";
+import SQLiteStore from "connect-sqlite3";
+const app = express();
+app.use(loggerCustom);
+import "./db/init.js";
+import "./db/populate.js";
+const PORT = 3000;
 
-// Inicializa app antes de usarla
-const app = express(); 
-const port = 3000;
+const SQLiteStoreSession = SQLiteStore(session);
 
-// Objeto SQLiteStore para guardar la sesión
-const SQLiteStoreSession = SQLitestore(session);
-
-// Configuración de la store
 const sessionStore = new SQLiteStoreSession({
-  db: 'sessions.sqlite',
-  dir: './db',
-});
+    db: "sessions.sqlite",
+    dir: "./db"
+})
 
 const sessionConfig = {
-  store: sessionStore,
-  secret: "1234",
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    maxAge: 1000 * 60 * 60 * 24, // 1 día
-  }
-};
+    store: sessionStore,
+    secret: "1234",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24
+    }
+}
 
-app.use(session(sessionConfig)); // Configura la sesión
+app.use(session(sessionConfig));
 
-app.use(loggerCustom); // Logger personalizado
+const env = nunjucks.configure("views", {
+    autoescape: true,
+    express: app,
+})
 
-const env = nunjucks.configure('views', { 
-  autoescape: true,
-  express: app // Integra nunjucks con express
-});
+app.set("view engine", "njk")
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use(express.json()); // Permite recibir JSON
-app.use(express.urlencoded({ extended: true })); // Permite recibir formularios
+import usersRouter from "./routes/users.js";
+import pagesRouter from "./routes/pages.js";
+import authRouter from "./routes/auth.js";
+app.use("/users", usersRouter);
+app.use("/", pagesRouter);
+app.use("/auth", authRouter);
 
-app.set('view engine', 'njk'); // Configura el motor de plantillas nunjucks
-
-// Define las rutas después de inicializar app
-app.use("/auth", authRouter); // Ruta de autenticación
-app.use("/", pagesRouter); // Ruta de páginas
-app.use("/users", userRouter); // Ruta de usuarios
-
-app.get('/', async (req, res) => {
-  const usersRaw = await User.findAll();
-  const users = usersRaw.map(user => {
-    return {
-      id: user.id,
-      username: user.username,
-      password: user.password,
-    };
-  });
-
-  console.log(users);
-  res.render('test', { 
-    title: 'Test de nunjucks',
-    desc: "Prueba de nunjucks",
-    users
-  });
-});
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
 });

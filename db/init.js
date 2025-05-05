@@ -1,14 +1,13 @@
-import { sequelize } from './sequelize.js';
-import { User } from '../models/user.js';
-import { Board } from '../models/board.js';
+import { sequelize } from "./sequelize.js";
 
-const initializeDB = async () => { 
-    try {
-        await sequelize.sync({ force: true }); // Sincroniza todos los modelos
-        console.log("Base de datos inicializada correctamente.");
-    } catch (error) {
+import "./associations.js"
+
+const initializeDB = async () => {
+    try{
+        await sequelize.sync({ force: true });
+    } catch(error) {
         console.error("Error initializing the database:", error);
     }
 };
 
-initializeDB();
+initializeDB()

@@ -3,13 +3,13 @@
 {% block content %}
     {{title}}
     {{desc}}
-    <form action="/auth/login" method="POST">
+    <form action="/users" method="POST">
         <div>
             <input type="text" name="username" placeholder="Username" required>
         </div>
         <div>
             <input type="text" name="password" placeholder="Password" required>
         </div>
-        <button type="submit">Login</button>
+        <button type="submit">Register</button>
     </form>
 {% endblock %}

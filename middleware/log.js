@@ -1,55 +1,30 @@
-import morgan from 'morgan';
-import chalk from 'chalk';
-
-
-
-
-const loggerBasic = morgan('dev')
+import morgan from "morgan";
+import chalk from "chalk";
+// Middleware de logging
+const loggerBasic = morgan("dev");
 const loggerCustom = morgan((tokens, req, res) => {
     const method = req.method;
     const url = req.url;
     const status = res.statusCode;
     const ip = req.ip;
-    const userAgent = req.headers['user-agent'];
-    const params = JSON.stringify(req.params);
+    const userAgent = req.headers["user-agent"];
     const body = JSON.stringify(req.body);
-    const query = JSON.stringify(req.query);
-    const responseTime = tokens['response-time'](req, res);
-    const date = new Date().toLocaleString();
+    const headers = JSON.stringify(req.headers);
+    const params = JSON.stringify(req.params);
+    const responseTime = tokens["response-time"](req, res);
+    const date = new Date().toISOString();
     let log = "";
-if (method === 'GET') {log += `
-    ${chalk.blue(method)} 
-    ${chalk.blue(url)} 
-    ${chalk.blue(status)} 
-    ${chalk.blue(ip)} \n`};
-if (method === 'POST') {log += `
-    ${chalk.green(method)} 
-    ${chalk.green(url)} 
-    ${chalk.green(status)} 
-    ${chalk.green(ip)} \n`;}
-if (method === 'PUT') {log += `
-    ${chalk.yellow(method)}
-    ${chalk.yellow(url)}
-    ${chalk.yellow(status)}
-    ${chalk.yellow(ip)} \n`;}
-if (method === 'DELETE') {log += `
-    ${chalk.red(method)}
-    ${chalk.red(url)}
-    ${chalk.red(status)}
-    ${chalk.red(ip)} \n`;}
-
-method === 'GET' ? console.log("Es un GET") : console.log("No es un GET");
-
-    log += `${method} ${url} ${status} \n`;
-    log += ` ${responseTime} ${date}\n`;
-    log += `IP: ${ip}\n`
-    log += `User-Agent: ${userAgent}\n`;
-    log += ` Params: ${params}\n`;
-    log += ` Body: ${body}\n`;
-    log += ` Query: ${query}\n`;
+    if (method === "GET") log += `${chalk.blue("►")} ${chalk.blue(method)} ${chalk.blue(url)} ${chalk.cyan(ip)} ${chalk.yellow(status)}\n`;
+    if (method === "POST") log += `${chalk.red("►")} ${chalk.red(method)} ${chalk.red(url)} ${chalk.cyan(ip)} ${chalk.yellow(status)}\n`;
+    if (method === "PUT") log += `${chalk.yellow("►")} ${chalk.yellow(method)} ${chalk.yellow(url)} ${chalk.cyan(ip)} ${chalk.yellow(status)}\n`;
+    if (method === "DELETE") log += `${chalk.magenta("►")} ${chalk.magenta(method)} ${chalk.magenta(url)} ${chalk.cyan(ip)} ${chalk.yellow(status)}\n`;
+    log += `${chalk.blue("►")} ${chalk.blue(method)} ${chalk.blue(url)} ${chalk.cyan(ip)} ${chalk.yellow(status)}\n`;
+    log += `User-Agent: ${userAgent} \n`;
+    log += `Body: ${body} \n`;
+    // log += `Headers: ${headers} \n`;
+    log += `Params: ${params} \n`;
+    log += `Time:${responseTime}ms ${date}`;
     return log;
-})
+});
 
-export { loggerBasic, loggerCustom };
-// loggerBasic es un middleware que se encarga de logear las peticiones que llegan al servidor
-// loggerCustom es un middleware que se encarga de logear las peticiones que llegan al servidor
+export { loggerBasic, loggerCustom }; 

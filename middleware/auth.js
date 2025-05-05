@@ -1,7 +1,7 @@
 export const isAuthenticated = (req, res, next) => {
-    if (req.session.userId){
+    if(req.session.userId){
         return next();
     }
-    res.render("/auth/login") //unauthorized
+    res.render("unauthorized.njk")
 }
 
