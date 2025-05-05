@@ -10,5 +10,5 @@ Post.belongsTo(User, { foreignKey: 'userId', as: 'user' });
 Board.hasMany(Post, { foreignKey: 'boardId', as: 'posts' });
 Post.belongsTo(Board, { foreignKey: 'boardId', as: 'board' });
 
-Post.hasMany(Comment, { foreignKey: 'postId', as: 'comments' });
-Comment.belongsTo(Post, { foreignKey: 'postId', as: 'post' });
+//Post.hasMany(Comment, { foreignKey: 'postId', as: 'comments' });
+//Comment.belongsTo(Post, { foreignKey: 'postId', as: 'post' });
