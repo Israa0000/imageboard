@@ -8,6 +8,7 @@ const router = express.Router();
 
 //DEVUELVE TODOS LOS USUARIOS Y SE RENDERERIZA EN TEST.NJK
 router.get("/", async (req, res) => {
+    console.log("hola mundo");
     const usersRaw = await User.findAll();
     const users = usersRaw.map((user) => {
         return {

@@ -9,6 +9,8 @@ const app = express();
 app.use(loggerCustom);
 import "./db/init.js";
 import "./db/associations.js";
+// tengo que rellenar de datos despues de inicializar
+import "./db/populate.js";
 const PORT = 3000;
 
 const SQLiteStoreSession = SQLiteStore(session);

@@ -24,4 +24,15 @@ router.post("/login", async (req, res) => {
     }
 });
 
+router.get("/logout", (req, res) => {
+    // Eliminar la sesión del usuario
+    req.session.destroy((err) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: "Error al cerrar sesión" });
+        }
+        res.redirect("/login");
+    });
+})
+
 export default router;
