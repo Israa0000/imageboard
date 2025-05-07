@@ -10,3 +10,8 @@
 - Vista board.njk
 - Router -> post
         -> board
+
+
+## 3 
+- QA Tester:ver que la pagina funciona perfectamente, ver el funcionamiento los enlaces y esta todo disponible.
+- Bug.bounty: Buscar bugs

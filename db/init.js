@@ -1,3 +1,5 @@
+//INICIALIZACIÓN DE LA BASE DE DATOS
+
 // filepath: /imageboard/db/init.js
 import { sequelize } from './sequelize.js';
 import { User } from '../models/user.js';

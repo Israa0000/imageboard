@@ -1,3 +1,5 @@
+//INSETA DATOS DE PRUEBA EN LA BASE DE DATOS
+
 import { User } from "../models/user.js";
 import { Board } from "../models/board.js";
 import { Post } from "../models/post.js";

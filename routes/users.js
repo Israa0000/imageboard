@@ -1,9 +1,12 @@
+//RUTAS DE USUARIOS
+
 import { User } from "../models/user.js";
 import express from "express";
 import bcrypt from "bcrypt";
 
 const router = express.Router();
 
+//DEVUELVE TODOS LOS USUARIOS Y SE RENDERERIZA EN TEST.NJK
 router.get("/", async (req, res) => {
     const usersRaw = await User.findAll();
     const users = usersRaw.map((user) => {
@@ -21,6 +24,7 @@ router.get("/", async (req, res) => {
     });
 });
 
+//CREA UN NUEVO USUARIO Y CONTRSEÑA HASHED
 router.post("/", async (req, res) => {
     const { username, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -28,7 +32,7 @@ router.post("/", async (req, res) => {
         username,
         password: hashedPassword,
     });
-    res.status(201).json(user);
+    res.status(201).redirect("/login");
 });
 
 export default router;

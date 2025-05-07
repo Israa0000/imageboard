@@ -1,3 +1,7 @@
+//Registra información sobre las peticiones 
+//HTTP en la consola, como método, URL, IP, y 
+//tiempo de respuesta.
+
 import morgan from "morgan";
 import chalk from "chalk";
 // Middleware de logging

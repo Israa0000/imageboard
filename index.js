@@ -1,3 +1,4 @@
+//CONFIGURACION SERVER
 import express from "express";
 import nunjucks from "nunjucks";
 import { User } from "./models/user.js";
@@ -29,12 +30,14 @@ const sessionConfig = {
 
 app.use(session(sessionConfig));
 
+//NUNJUCKS
 const env = nunjucks.configure("views", {
-    autoescape: true,
-    express: app,
+    autoescape: true, //Escapa automaticamente el contenido para evitar inyecciones
+    express: app, // Vincula Nunjucks a Express
 })
-
+//Establece NUnjucks como motor de plantillas
 app.set("view engine", "njk")
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
